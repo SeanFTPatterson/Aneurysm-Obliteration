@@ -1,0 +1,40 @@
+﻿field,label,table,popup,filter,search,display_order,format,link_text,heatmap,heatmap_order,heatmap_role,feasibility,feasibility_order,feasibility_role,feasibility_group
+id,Instrument ID,No,No,No,No,10,hidden,,,,,,,,
+name,Instrument,Yes,No,No,Yes,1,primary,,,,,,,,
+acronym,Acronym,No,No,No,Yes,2,hidden,,,,,,,,
+domain,Core domain,No,No,No,Yes,40,text,,,,,,,,
+domain-definition,Domain definition,No,Yes,No,No,45,url,View domain definition,,,,,,,
+status,Instrument selection status,Yes,Yes,Yes,Yes,20,badge,,,,,,,,
+identified-from,Identified in,Yes,Yes,Yes,No,30,text,,,,,,,,
+review-link,Review link,No,Yes,No,No,70,url,View review,,,,,,,
+description,Description,No,Yes,No,Yes,80,longtext,,,,,,,,
+description_reference,Description reference(s),No,Yes,No,No,100,longtext,,,,,,,,
+plain-language_description,Plain-language description,No,Yes,No,Yes,85,longtext,,,,,,,,
+full-version-of-measure,Full version of measure,No,Yes,No,No,110,url,View instrument resource,,,,,,,
+image,Instrument image,No,Yes,No,No,150,image,,,,,,,,
+image_alt,Image alternative text,No,No,No,No,160,hidden,,,,,,,,
+mapping_id,,No,No,No,No,0,hidden,,,,,,,,
+domain_match_concept,Concept coverage,No,Yes,No,No,31,badge,,Yes,1,,,,,
+domain_match_concept_rationale,,No,No,No,No,999,hidden,,,,,,,,
+domain_match_relevance,Applicability,No,Yes,No,No,32,badge,,Yes,2,,,,,
+domain_match_relevance_rationale,,No,No,No,No,999,hidden,,,,,,,,
+domain_match_interpretability,Interpretability,No,Yes,No,No,33,badge,,Yes,3,,,,,
+domain_match_interpretability_rationale,,No,No,No,No,999,hidden,,,,,,,,
+domain_match,Overall Domain Match,No,Yes,No,No,129,badge,,Yes,99,overall,,,,
+domain_match_rationale,,No,No,No,No,999,hidden,,,,,,,,
+feasibility_ease,Ease of use,No,Yes,No,No,121,badge,,,,,Yes,1,,Feasibility components
+feasibility_ease_rationale,,No,No,No,No,999,hidden,,,,,,,,
+feasibility_time,Time required,No,Yes,No,No,122,badge,,,,,Yes,2,,Feasibility components
+feasibility_time_rationale,,No,No,No,No,999,hidden,,,,,,,,
+feasibility_equipment,Equipment,No,Yes,No,No,123,badge,,,,,Yes,3,,Feasibility components
+feasibility_equipment_rationale,,No,No,No,No,999,hidden,,,,,,,,
+feasibility_training,Training,No,Yes,No,No,124,badge,,,,,Yes,4,,Feasibility components
+feasibility_training_rationale,,No,No,No,No,999,hidden,,,,,,,,
+feasibility_cost,Cost,No,Yes,No,No,125,badge,,,,,Yes,5,,Feasibility components
+feasibility_cost_rationale,,No,No,No,No,999,hidden,,,,,,,,
+feasibility_patient_burden,Patient burden,No,Yes,No,No,126,badge,,,,,Yes,6,,Feasibility components
+feasibility_patient_burden_rationale,,No,No,No,No,999,hidden,,,,,,,,
+feasibility_overall,Overall feasibility,No,Yes,No,No,127,badge,,,,,Yes,7,overall,Overall assessment
+feasibility_overall_rationale,,No,No,No,No,999,hidden,,,,,,,,
+feasibility_open_text,Other considerations,No,Yes,No,No,128,text,,,,,Yes,8,text,Open-text assessment
+feasibility_notes,Additional comments,No,Yes,No,No,129,text,,,,,Yes,9,text,Open-text assessment
