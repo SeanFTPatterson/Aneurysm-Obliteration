@@ -1,0 +1,22 @@
+﻿instrument_id,instrument,other_information_captured,mapping_notes,sort_order
+ags,Angiographic Grading Scale (AGS),Conventional three-state occlusion description.,Confirm precise grade labels against the original AGS source.,1
+boss,Bicêtre Occlusion Scale Score (BOSS),Distinguishes persistent flow inside a WEB device from residual neck or sac filling.,"BOSS 1 is intra-device flow, not a conventional neck remnant.",2
+kb,Kamran-Byrne Scale (KB),"Parent-artery status is captured separately: unchanged caliber, narrowing, or occlusion.",Filling grades shown for saccular aneurysms; fusiform definitions may differ.,3
+meyers,Meyer scale,Modifiers: I = interstitial opacification within the coil mass; G = interval aneurysm growth.,"Percentage-based categories do not distinguish neck from sac filling; these cutoffs are pragmatic, not a validated morphological equivalence.",4
+okm,O’Kelly–Marotta Scale (OKM),Separate stasis grade: 1 = no stasis; 2 = clears before venous phase; 3 = persists into venous phase/beyond.,The filling category and stasis category should both remain in the original reporting.,5
+ozp,Ozpeynirci Scale 4-value occlusion scale,"Grade 3a captures persistent contrast enhancement inside the WEB, distinct from an aneurysm remnant.",,6
+quant,Quantitative percent / volumetric measures,Reports residual filling as percentage; morphology is not necessarily captured.,No validated universal cutoff separates Limited from Substantial residual filling for percentage-only measures. Do not infer 90%/10% threshold as universal.,7
+rroc,Raymond-Roy,"Differentiates complete occlusion, neck remnant, and sac remnant.",,8
+ao009,Recurrence classification,,No grade-level crosswalk has been supplied for this entry.,9
+ao010,Remnant / residual aneurysm scales,,No grade-level crosswalk has been supplied for this entry.,10
+sindou,Sindou Classification,Graded postoperative remnants after clipping; Grade III describes a residual lobe whose size is not specified.,"The original Grades I–V describe residual aneurysms, not a graded complete-occlusion state.",11
+smart,Simple Measurement of Aneurysm Residual after Treatment (SMART),Grade 0 refers to an early coherent inflow jet regardless of occlusion rate. Also captures flow stagnation and parent-vessel in-stent stenosis (ISS0–ISS4).,Grade 0 is deliberately not assigned to any of the three reporting categories.,12
+unnamed3,Unnamed 3-point occlusion scale,Exact original wording and numbering require verification.,Conceptual three-state mapping only; validate against the instrument source.,13
+binary,Unnamed dichotomized occlusion scale,“Adequate occlusion” combines complete occlusion and neck remnant; therefore it cannot be uniquely assigned to either proposed category.,The two-grade original cannot be fully inverted into the three-category standard.,14
+wos,WEB Occlusion Scale (WOS),Distinguishes proximal WEB recess opacification from a neck or sac remnant.,,15
+ao016,Computerized / software-based occlusion assessment,,No grade-level crosswalk has been supplied for this entry.,16
+ao017,CT angiography (CTA),,No grade-level crosswalk has been supplied for this entry.,17
+ao018,Digital subtraction angiography (DSA),,No grade-level crosswalk has been supplied for this entry.,18
+ao019,Intraoperative assessment techniques,,No grade-level crosswalk has been supplied for this entry.,19
+ao020,Magnetic resonance angiography (MRA),,No grade-level crosswalk has been supplied for this entry.,20
+mrrc,Modified Raymond–Roy Classification (MRRC),Classes IIIa and IIIb distinguish filling patterns: contrast within coil interstices versus along the aneurysm wall.,"Both III subclasses map to the same proposed category, but are not clinically identical. No separate MRRC instrument record was supplied; mapping only.",21
