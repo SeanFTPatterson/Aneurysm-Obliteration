@@ -1,58 +1,59 @@
-﻿instrument_id,grade,category,original_definition,mapping_rationale,sort_order
-sindou,Grade I,limited,Residual neck <50% of neck size,Pragmatic limited-residual assignment. Grade III requires particular caution because residual lobe size is unspecified.,1
-sindou,Grade II,limited,Residual neck >50% of neck size,Pragmatic limited-residual assignment. Grade III requires particular caution because residual lobe size is unspecified.,2
-sindou,Grade III,limited,Residual lobe of a multilobulated sac,Pragmatic limited-residual assignment. Grade III requires particular caution because residual lobe size is unspecified.,3
-sindou,Grade IV,substantial,Residual sac <75% of the original aneurysm size,Residual sac persists. This proposed mapping is not a validated conversion.,4
-sindou,Grade V,substantial,Residual sac >75% of the original aneurysm size,Residual sac persists. This proposed mapping is not a validated conversion.,5
-ags,Complete,complete,Complete occlusion,Direct conceptual alignment with the proposed three-category standard.,1
-ags,Residual neck,limited,Residual filling confined to the neck,Direct conceptual alignment with the proposed three-category standard.,2
-ags,Residual aneurysm,substantial,Residual filling of the aneurysm sac,Direct conceptual alignment with the proposed three-category standard.,3
-meyers,Grade 0,complete,Complete aneurysm occlusion,Grade 1 is assigned provisionally by small residual percentage; Grades 2–5 grouped as greater residual burden. Keep original percentage grade.,1
-meyers,Grade 1,limited,≥90% occlusion (≤10% residual),Grade 1 is assigned provisionally by small residual percentage; Grades 2–5 grouped as greater residual burden. Keep original percentage grade.,2
-meyers,Grade 2,substantial,70–89% occlusion,Grade 1 is assigned provisionally by small residual percentage; Grades 2–5 grouped as greater residual burden. Keep original percentage grade.,3
-meyers,Grade 3,substantial,50–69% occlusion,Grade 1 is assigned provisionally by small residual percentage; Grades 2–5 grouped as greater residual burden. Keep original percentage grade.,4
-meyers,Grade 4,substantial,25–49% occlusion,Grade 1 is assigned provisionally by small residual percentage; Grades 2–5 grouped as greater residual burden. Keep original percentage grade.,5
-meyers,Grade 5,substantial,<25% occlusion,Grade 1 is assigned provisionally by small residual percentage; Grades 2–5 grouped as greater residual burden. Keep original percentage grade.,6
-rroc,Class I,complete,Complete occlusion,Conventional anatomical mapping.,1
-rroc,Class II,limited,Residual neck,Conventional anatomical mapping.,2
-rroc,Class III,substantial,Residual aneurysm,Conventional anatomical mapping.,3
-mrrc,Class I,complete,Complete obliteration,The proposed category collapses anatomical subtypes; original MRRC subclass should remain reported.,1
-mrrc,Class II,limited,Residual neck,The proposed category collapses anatomical subtypes; original MRRC subclass should remain reported.,2
-mrrc,Class IIIa,substantial,Residual aneurysm: contrast within coil interstices,The proposed category collapses anatomical subtypes; original MRRC subclass should remain reported.,3
-mrrc,Class IIIb,substantial,Residual aneurysm: contrast outside coil interstices / along aneurysm wall,The proposed category collapses anatomical subtypes; original MRRC subclass should remain reported.,4
-unnamed3,Complete,complete,Complete,"Provisional conceptual mapping, pending original definitions.",1
-unnamed3,Neck remnant,limited,Neck remnant,"Provisional conceptual mapping, pending original definitions.",2
-unnamed3,Sac remnant,substantial,Sac remnant,"Provisional conceptual mapping, pending original definitions.",3
-binary,Adequate,unmapped,Binary grouping that includes complete occlusion AND limited neck remnant,Cannot uniquely assign to Complete or Limited. Keep the original binary result.,1
-binary,Inadequate,substantial,Residual aneurysm / inadequate or incomplete occlusion,Assumes the source defines inadequate as residual aneurysm.,2
-kb,Grade 4,complete,No residual filling / complete obliteration,Filling grade mapping for saccular aneurysms.,1
-kb,Grade 3,limited,Residual filling confined to neck,Filling grade mapping for saccular aneurysms.,2
-kb,Grade 2,substantial,Residual filling <50% of pretreatment aneurysm,Filling grade mapping for saccular aneurysms.,3
-kb,Grade 1,substantial,Residual filling >50% of pretreatment aneurysm,Filling grade mapping for saccular aneurysms.,4
-kb,Grade 0,substantial,No change in aneurysm filling,Filling grade mapping for saccular aneurysms.,5
-okm,Grade D,complete,No filling (0%),Proposed filling-only crosswalk; grade B spans a broad range.,1
-okm,Grade C,limited,Entry remnant (<5% filling),Proposed filling-only crosswalk; grade B spans a broad range.,2
-okm,Grade B,substantial,Incomplete filling (5–95%),Proposed filling-only crosswalk; grade B spans a broad range.,3
-okm,Grade A,substantial,Complete filling (>95%),Proposed filling-only crosswalk; grade B spans a broad range.,4
-smart,Grade 4,complete,Complete occlusion,Provisional occlusion-component crosswalk.,1
-smart,Grade 3,limited,Residual neck (saccular aneurysm),Provisional occlusion-component crosswalk.,2
-smart,Grade 2,substantial,Residual dome filling (saccular) / wall filling (fusiform),Provisional occlusion-component crosswalk.,3
-smart,Grade 1,substantial,Patent aneurysm with diffuse inflow,Provisional occlusion-component crosswalk.,4
-smart,Grade 0,unmapped,"Early coherent inflow jet, irrespective of overall occlusion rate",Grade 0 measures inflow pattern and is not uniquely crosswalkable.,5
-boss,BOSS 0,complete,No residual flow inside aneurysm or WEB,Proposed treatment-neutral category; preserve WEB-specific original grade.,1
-boss,BOSS 0′,complete,Opacification confined to the proximal recess,Proposed treatment-neutral category; preserve WEB-specific original grade.,2
-boss,BOSS 1,limited,"Residual flow inside WEB, with complete neck sealing",Proposed treatment-neutral category; preserve WEB-specific original grade.,3
-boss,BOSS 2,limited,Neck remnant,Proposed treatment-neutral category; preserve WEB-specific original grade.,4
-boss,BOSS 3,substantial,Aneurysm remnant,Proposed treatment-neutral category; preserve WEB-specific original grade.,5
-boss,BOSS 1+3,substantial,Flow inside device and aneurysm sac / around device without neck sealing,Proposed treatment-neutral category; preserve WEB-specific original grade.,6
-ozp,Grade 1,complete,Total occlusion,"Preserve device-specific description, particularly Grade 3a.",1
-ozp,Grade 2,limited,Neck remnant,"Preserve device-specific description, particularly Grade 3a.",2
-ozp,Grade 3a,limited,Persistent enhancement inside the WEB,"Preserve device-specific description, particularly Grade 3a.",3
-ozp,Grade 3b,substantial,Aneurysm remnant,"Preserve device-specific description, particularly Grade 3a.",4
-wos,Grade A,complete,Complete occlusion without residual aneurysm filling,Preserve WEB-specific original grade.,1
-wos,Grade B,complete,Complete occlusion with filling confined to proximal WEB recess,Preserve WEB-specific original grade.,2
-wos,Grade C,limited,Residual aneurysm neck,Preserve WEB-specific original grade.,3
-wos,Grade D,substantial,Residual aneurysm sac filling,Preserve WEB-specific original grade.,4
-quant,100%,complete,100% occlusion,Exactly complete occlusion by quantitative measure.,1
-quant,0%,substantial,0% occlusion / complete residual filling,Unambiguously substantial residual filling.,2
-quant,1–99%,unmapped,Intermediate percentage occlusion,Cannot assign a universal Limited versus Substantial category without explicit validated threshold or morphological information.,3
+﻿instrument_id,grade,category,original_definition,mapping_rationale,sort_order,mapping_status,spans_categories
+sindou,Grade I,limited,Residual neck <50% of neck size,Residual neck remnant: provisionally treated as limited residual filling; neck size alone does not define residual volume.,1,provisional,
+sindou,Grade II,limited,Residual neck >50% of neck size,Residual neck remnant: provisionally treated as limited residual filling; neck size alone does not define residual volume.,2,provisional,
+sindou,Grade III,span,Residual lobe of a multilobulated sac,This original grade describes a residual lobe or sac without sufficient information to distinguish limited from substantial filling. A unique category requires more detail on the residual extent or morphology. The crosswalk is provisional.,3,spans,limited|substantial
+sindou,Grade IV,span,Residual sac <75% of the original aneurysm size,This original grade describes a residual lobe or sac without sufficient information to distinguish limited from substantial filling. A unique category requires more detail on the residual extent or morphology. The crosswalk is provisional.,4,spans,limited|substantial
+sindou,Grade V,substantial,Residual sac >75% of the original aneurysm size,Residual sac persists; the substantial-filling assignment is provisional rather than a validated treatment-neutral equivalence.,5,provisional,
+ags,Complete,complete,Complete occlusion,Direct conceptual alignment with the proposed three-category standard.,1,direct,
+ags,Residual neck,limited,Residual filling confined to the neck,Direct conceptual alignment with the proposed three-category standard.,2,direct,
+ags,Residual aneurysm,substantial,Residual filling of the aneurysm sac,Direct conceptual alignment with the proposed three-category standard.,3,direct,
+meyers,Grade 0,complete,Complete aneurysm occlusion,Grade 1 is assigned provisionally by small residual percentage; Grades 2–5 grouped as greater residual burden. Keep original percentage grade.,1,provisional,
+meyers,Grade 1,limited,≥90% occlusion (≤10% residual),"Near-complete percentage occlusion is provisionally aligned with limited filling, but this is not an anatomical neck-remnant equivalence or a validated cutoff.",2,provisional,
+meyers,Grade 2,span,70–89% occlusion,70–89% occlusion leaves an estimated 11–30% residual filling. No agreed cross-treatment threshold separates limited from substantial filling; this grade can span both.,3,spans,limited|substantial
+meyers,Grade 3,substantial,50–69% occlusion,Greater residual percentage is provisionally grouped as substantial; keep the original percentage grade because no validated limited/substantial boundary is established.,4,provisional,
+meyers,Grade 4,substantial,25–49% occlusion,Greater residual percentage is provisionally grouped as substantial; keep the original percentage grade because no validated limited/substantial boundary is established.,5,provisional,
+meyers,Grade 5,substantial,<25% occlusion,Greater residual percentage is provisionally grouped as substantial; keep the original percentage grade because no validated limited/substantial boundary is established.,6,provisional,
+rroc,Class I,complete,Complete occlusion,Conventional anatomical mapping.,1,direct,
+rroc,Class II,limited,Residual neck,Conventional anatomical mapping.,2,direct,
+rroc,Class III,substantial,Residual aneurysm,Conventional anatomical mapping.,3,direct,
+mrrc,Class I,complete,Complete obliteration,The proposed category collapses anatomical subtypes; original MRRC subclass should remain reported.,1,direct,
+mrrc,Class II,limited,Residual neck,The proposed category collapses anatomical subtypes; original MRRC subclass should remain reported.,2,direct,
+mrrc,Class IIIa,substantial,Residual aneurysm: contrast within coil interstices,The proposed category collapses anatomical subtypes; original MRRC subclass should remain reported.,3,direct,
+mrrc,Class IIIb,substantial,Residual aneurysm: contrast outside coil interstices / along aneurysm wall,The proposed category collapses anatomical subtypes; original MRRC subclass should remain reported.,4,direct,
+unnamed3,Complete,complete,Complete,"Provisional conceptual mapping, pending original definitions.",1,provisional,
+unnamed3,Neck remnant,limited,Neck remnant,"Provisional conceptual mapping, pending original definitions.",2,provisional,
+unnamed3,Sac remnant,substantial,Sac remnant,"Provisional conceptual mapping, pending original definitions.",3,provisional,
+binary,Adequate,span,Binary grouping that includes complete occlusion AND limited neck remnant,Adequate occlusion pools complete occlusion and neck remnants. It spans the first two proposed categories and cannot be disaggregated without the original grade or imaging details.,1,spans,complete|limited
+binary,Inadequate,substantial,Residual aneurysm / inadequate or incomplete occlusion,Assumes the source defines inadequate as residual aneurysm.,2,provisional,
+kb,Grade 4,complete,No residual filling / complete obliteration,Filling grade mapping for saccular aneurysms.,1,provisional,
+kb,Grade 3,limited,Residual filling confined to neck,Filling grade mapping for saccular aneurysms.,2,provisional,
+kb,Grade 2,substantial,Residual filling <50% of pretreatment aneurysm,Filling grade mapping for saccular aneurysms.,3,provisional,
+kb,Grade 1,substantial,Residual filling >50% of pretreatment aneurysm,Filling grade mapping for saccular aneurysms.,4,provisional,
+kb,Grade 0,substantial,No change in aneurysm filling,Filling grade mapping for saccular aneurysms.,5,provisional,
+okm,Grade D,complete,No filling (0%),Proposed filling-only crosswalk; grade B spans a broad range.,1,provisional,
+okm,Grade C,limited,Entry remnant (<5% filling),Entry remnant (<5% filling) is provisionally aligned with limited residual filling. Stasis is a separate dimension and must remain reported.,2,provisional,
+okm,Grade B,span,Incomplete filling (5–95%),Grade B spans 5–95% aneurysm filling. The same grade may represent limited or substantial residual filling; an additional quantitative or morphological assessment is required. Report the separate stasis grade.,3,spans,limited|substantial
+okm,Grade A,substantial,Complete filling (>95%),Proposed filling-only crosswalk; grade B spans a broad range.,4,provisional,
+smart,Grade 4,complete,Complete occlusion,Provisional occlusion-component crosswalk.,1,provisional,
+smart,Grade 3,limited,Residual neck (saccular aneurysm),Provisional occlusion-component crosswalk.,2,provisional,
+smart,Grade 2,substantial,Residual dome filling (saccular) / wall filling (fusiform),Provisional occlusion-component crosswalk.,3,provisional,
+smart,Grade 1,substantial,Patent aneurysm with diffuse inflow,Provisional occlusion-component crosswalk.,4,provisional,
+smart,Grade 0,unmapped,"Early coherent inflow jet, irrespective of overall occlusion rate","An early coherent inflow jet measures flow pattern, potentially independent of total occlusion extent. Cannot be assigned to one of the three filling categories.",5,unmapped,
+boss,BOSS 0,complete,No residual flow inside aneurysm or WEB,Proposed treatment-neutral category; preserve WEB-specific original grade.,1,provisional,
+boss,BOSS 0′,complete,Opacification confined to the proximal recess,Proposed treatment-neutral category; preserve WEB-specific original grade.,2,provisional,
+boss,BOSS 1,limited,"Residual flow inside WEB, with complete neck sealing",Proposed treatment-neutral category; preserve WEB-specific original grade.,3,provisional,
+boss,BOSS 2,limited,Neck remnant,Proposed treatment-neutral category; preserve WEB-specific original grade.,4,provisional,
+boss,BOSS 3,substantial,Aneurysm remnant,Proposed treatment-neutral category; preserve WEB-specific original grade.,5,provisional,
+boss,BOSS 1+3,substantial,Flow inside device and aneurysm sac / around device without neck sealing,Proposed treatment-neutral category; preserve WEB-specific original grade.,6,provisional,
+ozp,Grade 1,complete,Total occlusion,"Preserve device-specific description, particularly Grade 3a.",1,provisional,
+ozp,Grade 2,limited,Neck remnant,"Preserve device-specific description, particularly Grade 3a.",2,provisional,
+ozp,Grade 3a,limited,Persistent enhancement inside the WEB,"Preserve device-specific description, particularly Grade 3a.",3,provisional,
+ozp,Grade 3b,substantial,Aneurysm remnant,"Preserve device-specific description, particularly Grade 3a.",4,provisional,
+wos,Grade A,complete,Complete occlusion without residual aneurysm filling,Preserve WEB-specific original grade.,1,provisional,
+wos,Grade B,complete,Complete occlusion with filling confined to proximal WEB recess,Preserve WEB-specific original grade.,2,provisional,
+wos,Grade C,limited,Residual aneurysm neck,Preserve WEB-specific original grade.,3,provisional,
+wos,Grade D,substantial,Residual aneurysm sac filling,Preserve WEB-specific original grade.,4,provisional,
+quant,100%,complete,100% aneurysm occlusion (only when the measurement actually quantifies occlusion),A true 100% occlusion measurement aligns with complete occlusion; this inference does not apply to 100% coil packing density.,1,direct,
+quant,0%,substantial,0% aneurysm occlusion (only when the measurement actually quantifies occlusion),A true 0% occlusion measurement indicates unabated residual filling; this does not apply to packing-density measures.,2,direct,
+quant,1–99%,span,Any non-endpoint percentage of aneurysm occlusion (1–99%),"The continuous percentage must be retained. No validated universal numerical threshold separates limited and substantial filling, so the grade spans both categories rather than belonging to either one uniquely. Applies to percentage occlusion, not coil packing density.",3,spans,limited|substantial
+quant,Volumetric packing density,unmapped,"Density of coil packing within the aneurysm, usually expressed as a percent of aneurysm volume.","Packing density is not the percentage of aneurysm occlusion and cannot independently indicate complete, limited, or substantial residual filling.",4,unmapped,
