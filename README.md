@@ -7,7 +7,7 @@ A database focused **only on Aneurysm Obliteration**, updated to the November 20
 - Standard instrument table with configurable fields, search, optional filters, record popups, image zoom, deep links, sticky modal header, previous/next navigation, keyboard shortcuts, jump menu, viewed markers, and local-state persistence.
 - **Domain Match** heat-map view with configurable component columns and rationale popovers (no blurry info icon).
 - **Feasibility** comparison view with categorical and open-text columns, horizontal scrolling and the scroll left/right buttons. **No Compact/Detailed toggle**.
-- **Mapping** view restricted to 14 explicitly included grading scales / continuous occlusion measurement approaches (not CTA, DSA, MRA, intraoperative assessment, software-based measurement, or generic recurrence/remnant groupings). It retains the 5-column layout, individual grade badges, the sticky instrument column/header, and the open-text **Other information captured** column. Cross-category grades appear once as a long dashed ↔ badge crossing the relevant columns; provisional mappings have dotted borders; non-classifiable grades appear as grey badges in the last column.
+- **Mapping** view restricted to 14 explicitly included grading scales / continuous occlusion measurement approaches (not CTA, DSA, MRA, intraoperative assessment, software-based measurement, or generic recurrence/remnant groupings). It retains the 5-column layout, individual grade badges, the sticky instrument column/header, and the open-text **Other information captured** column. Cross-category grades appear once as a long dashed ↔ badge crossing the relevant columns, positioned among the other grades in original scale order. Each instrument occupies exactly one table row; all five mapping columns have white body backgrounds, with stronger separators between instruments. Provisional mappings have dotted borders; non-classifiable grades appear as grey badges in the last column.
 - Badge colours configurable by CSV; no build tools required.
 
 ## Data sources and status
@@ -133,3 +133,14 @@ The mapping pop-up is shared with the existing popover system, so click/tap to p
 The Mapping tab now displays a grade with `category=span` as **one long badge** crossing the relevant category columns, instead of duplicating the badge in every column. Examples include OKM Grade B (Limited ↔ Substantial) and binary “Adequate” (Complete ↔ Limited). Each wide badge remains clickable and opens the same structured Grade details panel.
 
 The layout uses a second compact table row with a three-column spanning cell, while the instrument name and Other information captured appear once using HTML `rowspan`. When a scale has multiple spanning grades, each receives a separate compact row. Single-category and unmappable grades behave as before. **No CSV changes are needed**, and the crosswalk remains provisional.
+
+## Mapping layout refinement (November 8, 2026)
+
+- Each instrument now occupies **a single HTML table row**; spanning badges no longer add separate table rows.
+- Individual badges appear in the scale's own `sort_order`, including grades that span categories; adjacent grades in the same category are grouped compactly.
+- The body of the mapping table is white, while the three category **headers** and grade badges retain their colours.
+- Horizontal rules between instruments are 3px; thin vertical guides still show category boundaries.
+- Grade Details popovers and `mapping_grades.csv` data remain unchanged.
+- To reorder the display, edit `sort_order` for the instrument in `data/mapping_grades.csv`.
+
+- For continuous percentage occlusion entries, display order is **100%, 1–99%, 0%** (descending occlusion) for clarity; no categories or rationales were changed.
