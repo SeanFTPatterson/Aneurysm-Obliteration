@@ -1,21 +1,16 @@
 ﻿field,value,background,text
 *,Good,#e4f4e8,#225b39
 *,Partially good,#fff0c7,#735608
-*,Partially / good,#fff0c7,#735608
 *,Partially poor,#ffe5cd,#91470b
-*,Partially / poor,#ffe5cd,#91470b
 *,Poor,#fde4e4,#9f2431
 *,Unable to judge,#f1f3f5,#596475
 *,No evidence,#ffffff,#596475
 *,Yes,#e4f4e8,#225b39
 *,No,#fde4e4,#9f2431
-*,Partially / with concerns,#fff0c7,#735608
 *,Partially or with concerns,#fff0c7,#735608
-*,Very easy,#e4f4e8,#225b39
-*,Easy,#e4f4e8,#225b39
-*,Moderate,#fff0c7,#735608
-*,Difficult,#ffe5cd,#91470b
-*,Very difficult,#fde4e4,#9f2431
 *,Retained,#e4f4e8,#225b39
-*,Under review,#fff0c7,#735608
+*,Under consideration,#fff0c7,#735608
+*,Excluded from further COS consideration,#fde4e4,#9f2431
 *,Identified,#eaf1ff,#2c5f9e
+instrument-type,Occlusion scale,#eaf1ff,#2c5f9e
+instrument-type,Imaging technique,#f1f3f5,#596475

@@ -9,32 +9,24 @@ identified-from,Identified in,Yes,Yes,Yes,No,30,text,,,,,,,,
 review-link,Review link,No,Yes,No,No,70,url,View review,,,,,,,
 description,Description,No,Yes,No,Yes,80,longtext,,,,,,,,
 description_reference,Description reference(s),No,Yes,No,No,100,longtext,,,,,,,,
+instrument-type,Instrument type,Yes,No,Yes,No,101,badge,,,,,,,,
+modality,Occlusion modality,No,No,No,No,,hidden,,,,,,,,
 plain-language_description,Plain-language description,No,Yes,No,Yes,85,longtext,,,,,,,,
 full-version-of-measure,Full version of measure,No,Yes,No,No,110,url,View instrument resource,,,,,,,
 image,Instrument image,No,Yes,No,No,150,image,,,,,,,,
 image_alt,Image alternative text,No,No,No,No,160,hidden,,,,,,,,
 mapping_id,,No,No,No,No,0,hidden,,,,,,,,
-domain_match_concept,Concept coverage,No,Yes,No,No,31,badge,,Yes,1,,,,,
-domain_match_concept_rationale,,No,No,No,No,999,hidden,,,,,,,,
-domain_match_relevance,Applicability,No,Yes,No,No,32,badge,,Yes,2,,,,,
-domain_match_relevance_rationale,,No,No,No,No,999,hidden,,,,,,,,
-domain_match_interpretability,Interpretability,No,Yes,No,No,33,badge,,Yes,3,,,,,
-domain_match_interpretability_rationale,,No,No,No,No,999,hidden,,,,,,,,
-domain_match,Overall Domain Match,No,Yes,No,No,129,badge,,Yes,99,overall,,,,
-domain_match_rationale,,No,No,No,No,999,hidden,,,,,,,,
+domain_match_overall,Domain match,Yes,No,Yes,No,5,badge,,,,,,,,
+domain_match_1,Match to the Domain,No,No,No,No,31,badge,,Yes,1,,,,,
+domain_match_2,Coverage of Domain Elements,No,No,No,No,32,badge,,Yes,2,,,,,
+domain_match_3,Specificity to the Domain,No,No,No,No,33,badge,,Yes,3,,,,,
+domain_match_4,Standardization,No,No,No,No,34,badge,,Yes,4,,,,,
+domain_match_5,Timing,No,No,No,No,34,badge,,Yes,5,,,,,
+domain_match_6,Appropriateness of Classifications,No,No,No,No,35,badge,,Yes,6,,,,,
+feasibility_overall,Overall feasibility,No,No,No,No,6,badge,,,,,,,,
 feasibility_ease,Ease of use,No,Yes,No,No,121,badge,,,,,Yes,1,,Feasibility components
-feasibility_ease_rationale,,No,No,No,No,999,hidden,,,,,,,,
 feasibility_time,Time required,No,Yes,No,No,122,badge,,,,,Yes,2,,Feasibility components
-feasibility_time_rationale,,No,No,No,No,999,hidden,,,,,,,,
 feasibility_equipment,Equipment,No,Yes,No,No,123,badge,,,,,Yes,3,,Feasibility components
-feasibility_equipment_rationale,,No,No,No,No,999,hidden,,,,,,,,
 feasibility_training,Training,No,Yes,No,No,124,badge,,,,,Yes,4,,Feasibility components
-feasibility_training_rationale,,No,No,No,No,999,hidden,,,,,,,,
 feasibility_cost,Cost,No,Yes,No,No,125,badge,,,,,Yes,5,,Feasibility components
-feasibility_cost_rationale,,No,No,No,No,999,hidden,,,,,,,,
 feasibility_patient_burden,Patient burden,No,Yes,No,No,126,badge,,,,,Yes,6,,Feasibility components
-feasibility_patient_burden_rationale,,No,No,No,No,999,hidden,,,,,,,,
-feasibility_overall,Overall feasibility,No,Yes,No,No,127,badge,,,,,Yes,7,overall,Overall assessment
-feasibility_overall_rationale,,No,No,No,No,999,hidden,,,,,,,,
-feasibility_open_text,Other considerations,No,Yes,No,No,128,text,,,,,Yes,8,text,Open-text assessment
-feasibility_notes,Additional comments,No,Yes,No,No,129,text,,,,,Yes,9,text,Open-text assessment
