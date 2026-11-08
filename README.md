@@ -7,7 +7,7 @@ A database focused **only on Aneurysm Obliteration**, updated to the November 20
 - Standard instrument table with configurable fields, search, optional filters, record popups, image zoom, deep links, sticky modal header, previous/next navigation, keyboard shortcuts, jump menu, viewed markers, and local-state persistence.
 - **Domain Match** heat-map view with configurable component columns and rationale popovers (no blurry info icon).
 - **Feasibility** comparison view with categorical and open-text columns, horizontal scrolling and the scroll left/right buttons. **No Compact/Detailed toggle**.
-- **Mapping** view restricted to 14 explicitly included grading scales / continuous occlusion measurement approaches (not CTA, DSA, MRA, intraoperative assessment, software-based measurement, or generic recurrence/remnant groupings). It retains the 5-column layout, individual grade badges, the sticky instrument column/header, and the open-text **Other information captured** column. Cross-category grades appear in both relevant columns with a dashed ↔ badge; provisional mappings have dotted borders; non-classifiable grades appear as grey badges in the last column.
+- **Mapping** view restricted to 14 explicitly included grading scales / continuous occlusion measurement approaches (not CTA, DSA, MRA, intraoperative assessment, software-based measurement, or generic recurrence/remnant groupings). It retains the 5-column layout, individual grade badges, the sticky instrument column/header, and the open-text **Other information captured** column. Cross-category grades appear once as a long dashed ↔ badge crossing the relevant columns; provisional mappings have dotted borders; non-classifiable grades appear as grey badges in the last column.
 - Badge colours configurable by CSV; no build tools required.
 
 ## Data sources and status
@@ -80,7 +80,7 @@ One CSV row per original grade, even when a grade spans two categories. Columns:
 **Display rules:**
 
 1. **Multiple grades in one category** are shown as separate ordinary coloured badges in the same cell.
-2. **A single grade spanning categories** must have `category=span`, `mapping_status=spans`, and `spans_categories=complete|limited` or `limited|substantial`. It is **one source row**, rendered as a **dashed ↔ badge in each applicable category cell**. These are not two independently observed grades. The popover names both categories.
+2. **A single grade spanning categories** must have `category=span`, `mapping_status=spans`, and `spans_categories=complete|limited` or `limited|substantial`. It is **one source CSV row**, rendered as **one wide dashed ↔ badge extending across the relevant category columns**. When an instrument has multiple spanning grades, each gets its own compact sub-row so the badges never overlap. These are not two independently observed grades. The popover names both categories.
 3. **A grade that measures another construct or has no justifiable mapping** uses `category=unmapped`, `mapping_status=unmapped`. It displays once as a **grey badge below “Not directly classifiable” in the right-most column**.
 4. **A plausible but not validated one-category approximation** keeps the destination `category` and uses `mapping_status=provisional` (dotted border). Do not interpret it as equivalent to a validated grade conversion.
 
@@ -127,3 +127,9 @@ Selecting (or hovering/focusing) a grade badge in **Mapping** now opens a struct
 The **original CSV values are unchanged**, including every rationale. A grade's descriptive text and its mapping rationale remain separate fields, so you can refine either without touching the HTML. The separate **Other information captured** column remains unchanged. Domain Match and Feasibility rationale pop-ups still use their existing compact style.
 
 The mapping pop-up is shared with the existing popover system, so click/tap to pin, hover, keyboard focus, close, and Esc handling all continue to work.
+
+## Single, cross-column spanning badges
+
+The Mapping tab now displays a grade with `category=span` as **one long badge** crossing the relevant category columns, instead of duplicating the badge in every column. Examples include OKM Grade B (Limited ↔ Substantial) and binary “Adequate” (Complete ↔ Limited). Each wide badge remains clickable and opens the same structured Grade details panel.
+
+The layout uses a second compact table row with a three-column spanning cell, while the instrument name and Other information captured appear once using HTML `rowspan`. When a scale has multiple spanning grades, each receives a separate compact row. Single-category and unmappable grades behave as before. **No CSV changes are needed**, and the crosswalk remains provisional.

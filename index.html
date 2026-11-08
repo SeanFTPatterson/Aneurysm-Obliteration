@@ -220,6 +220,26 @@
   .map-badge.is-unmapped{background:#ebeff4;border-color:#b9c2cc;color:#4b5765}
   .map-untagged{padding:6px 0;border-top:1px solid #e1e7ec;margin-top:10px}
   .map-untagged .map-badge{white-space:normal;text-align:left}
+
+  /* One continuous badge across the corresponding classification columns. A separate
+     compact row is used for each spanning source grade; instrument and free-text cells
+     use rowspan so neither appears more than once. The three bands track table widths. */
+  .mapping-table td.map-span-lane{padding:0!important;background:#fff!important;border-right:1px solid #e1e7ec;vertical-align:middle}
+  .map-span-track{display:grid;grid-template-columns:15fr 15fr 17fr;grid-template-rows:minmax(46px,auto);position:relative;min-height:46px;align-items:stretch}
+  .map-span-band{grid-row:1;min-height:46px;pointer-events:none}
+  .map-span-band.complete{grid-column:1;background:#f1faf4;border-right:1px solid #e1e7ec}
+  .map-span-band.limited{grid-column:2;background:#fffaeb;border-right:1px solid #e1e7ec}
+  .map-span-band.substantial{grid-column:3;background:#fff4f5}
+  .map-span-long-badge{grid-row:1;align-self:center;justify-self:stretch;min-width:0;margin:5px 9px;width:calc(100% - 18px);max-width:none;display:inline-flex;justify-content:center;align-items:center;gap:7px;position:relative;z-index:1;border-style:dashed!important;border-width:2px!important;border-color:#8665a6!important;color:#543971!important;box-shadow:0 1px 3px rgba(65,45,90,.11);font-weight:800;white-space:normal;overflow-wrap:anywhere;text-align:center;min-height:30px}
+  .map-span-long-badge.range-complete-limited{background:linear-gradient(90deg,#dff2e4 0 50%,#fff0cd 50% 100%)!important}
+  .map-span-long-badge.range-limited-substantial{background:linear-gradient(90deg,#fff1cc 0 50%,#fbe0e4 50% 100%)!important}
+  .map-span-long-badge.range-complete-substantial{background:linear-gradient(90deg,#dff2e4 0 32%,#fff0cd 33% 66%,#fbe0e4 67% 100%)!important}
+  .map-span-long-badge .span-marker{font-size:16px;line-height:1}
+  .mapping-table tr.has-spanning td{border-bottom-color:#ecedf0}
+  .mapping-table tr.map-span-row:not(.map-last-span-row) td{border-bottom-color:#edf0f3}
+  .mapping-table tr.map-span-row:hover .map-span-band.complete{background:#eaf8ee}
+  .mapping-table tr.map-span-row:hover .map-span-band.limited{background:#fff5d9}
+  .mapping-table tr.map-span-row:hover .map-span-band.substantial{background:#ffecee}
 </style>
 </head>
 <body>
@@ -296,7 +316,7 @@
     <div class="mapping-status-key" aria-label="Guide to mapping badges">
       <span><span class="key-swatch direct" aria-hidden="true"></span><strong>Single-category:</strong> one proposed category</span>
       <span><span class="key-swatch provisional" aria-hidden="true"></span><strong>Provisional:</strong> dotted badge border; not an exact equivalence</span>
-      <span><span class="key-swatch spans" aria-hidden="true">↔</span><strong>Spans categories:</strong> dashed badge repeated in both applicable columns</span>
+      <span><span class="key-swatch spans" aria-hidden="true">↔</span><strong>Spans categories:</strong> one long dashed badge crossing the relevant columns</span>
       <span><span class="key-swatch unmapped" aria-hidden="true"></span><strong>Not directly classifiable:</strong> grey badge in Other information</span>
     </div>
     <div class="table-card"><div class="table-wrap mapping-table-wrap" id="mappingTableWrap" tabindex="0" aria-label="Scrollable scale mapping comparison">
@@ -305,7 +325,7 @@
         <tbody id="mappingBody"></tbody>
       </table>
     </div><div id="mappingEmpty" class="empty" hidden>No mapping records match the current search.</div></div>
-    <p class="mapping-caveat"><strong>Interpretation:</strong> This is a provisional crosswalk, not an endorsed or validated equivalence. Dashed ↔ badges appear in both possible category columns but represent <em>one original grade</em>, not two separate observations. Grey grades measure another concept or lack sufficient information for any category. Percentage-based conversions are not standardized thresholds. A dash means no grade assigned to that column. Always retain the original grade and relevant additional measurements.</p>
+    <p class="mapping-caveat"><strong>Interpretation:</strong> This is a provisional crosswalk, not an endorsed or validated equivalence. A single dashed ↔ badge extends across the relevant common-category columns; it represents <em>one original grade</em>, not two separate observations. Grey grades measure another concept or lack sufficient information for any category. Percentage-based conversions are not standardized thresholds. A dash means no grade assigned to that column. Always retain the original grade and relevant additional measurements.</p>
   </section>
 
   <div class="footerbar">
@@ -953,9 +973,9 @@ function setResultsView(view,{persist=true}={}){
     ? 'Browse the instrument table; select a name to open its full record.'
     : heatmap ? 'Compare Domain Match ratings across instruments. Select a rating to view its rationale.'
     : feasibility ? 'Compare categorical and open-text feasibility information; scroll horizontally to see all columns.'
-    : 'Compare occlusion scales. Dashed ↔ badges span two categories; grey badges cannot be classified.';
+    : 'Compare occlusion scales. Long dashed ↔ badges span categories; grey badges cannot be classified.';
   document.getElementById('viewTip').textContent=mapping
-    ? 'Tip: ↔ grades appear in both possible columns. Select any badge for the definition and mapping rationale.'
+    ? 'Tip: Long ↔ badges cross their applicable category columns. Select any badge to see the original definition and proposed mapping.'
     : 'Tip: select an instrument name to open its full record.';
   document.getElementById('count').textContent=mapping ? getFilteredMappingInstruments().length : filteredRows().length;
   document.getElementById('countLabel').textContent=mapping ? 'scales / quantitative measures shown' : 'instruments shown';
@@ -1075,13 +1095,16 @@ function renderMapping(){
   const entries=getFilteredMappingInstruments();
   const tbody=document.getElementById('mappingBody');
   document.getElementById('mappingEmpty').hidden=entries.length!==0;
+  const categoryOrder=['complete','limited','substantial'];
   tbody.innerHTML=entries.map(m=>{
     const linked=findInstrumentForMapping(m);
     const label=escapeHTML(m.instrument || m.instrument_id);
     const name=linked && linked.id ? `<a class="map-instrument-link" href="${escapeHTML(recordUrl(linked.id).pathname+recordUrl(linked.id).search+recordUrl(linked.id).hash)}" data-record-id="${escapeHTML(linked.id)}">${label}</a>`:label;
     const grades=mappingGrades.filter(g=>g.instrument_id===m.instrument_id).sort((a,b)=>(Number(a.sort_order)||0)-(Number(b.sort_order)||0));
+    const singleGrades=grades.filter(g=>mappingGradeCategories(g).length===1);
+    const spanningGrades=grades.filter(g=>mappingGradeCategories(g).length>1);
     const group=key=>{
-      const groupGrades=grades.filter(g=>mappingGradeCategories(g).includes(key));
+      const groupGrades=singleGrades.filter(g=>mappingGradeCategories(g)[0]===key);
       return groupGrades.length?`<div class="map-grades">${groupGrades.map(g=>mappingGradeBadge(g,key,m.instrument)).join('')}</div>`:'<span class="mapping-missing" aria-label="No grade assigned">—</span>';
     };
     const unmapped=grades.filter(g=>mappingGradeCategories(g).length===0);
@@ -1089,7 +1112,30 @@ function renderMapping(){
     const note=notes?`<div class="map-notes">${escapeHTML(notes)}</div>`:'';
     const needsMapping=!grades.length?'<div class="map-notes"><strong>No grade assignments supplied</strong></div>':'';
     const untagged=unmapped.length?`<div class="map-untagged"><span>Not directly classifiable: </span>${unmapped.map(g=>mappingGradeBadge(g,'unmapped',m.instrument)).join(' ')}</div>`:'';
-    return `<tr><td>${name}</td><td>${group('complete')}</td><td>${group('limited')}</td><td>${group('substantial')}</td><td><div class="map-other">${escapeHTML(m.other_information_captured || '—')}</div>${note}${needsMapping}${untagged}</td></tr>`;
+    const rowSpan=spanningGrades.length+1;
+    const spanAttribute=rowSpan>1?` rowspan="${rowSpan}"`:'';
+    const baseRow=`<tr class="${spanningGrades.length?'has-spanning':''}">
+      <td${spanAttribute}>${name}</td>
+      <td>${group('complete')}</td>
+      <td>${group('limited')}</td>
+      <td>${group('substantial')}</td>
+      <td${spanAttribute}><div class="map-other">${escapeHTML(m.other_information_captured || '—')}</div>${note}${needsMapping}${untagged}</td>
+    </tr>`;
+
+    // Each source grade appears exactly once, as a single badge over its whole
+    // category range. Separate compact rows avoid overlapping badges when one
+    // scale has multiple spanning grades (e.g. Sindou III and IV).
+    const spans=spanningGrades.map((g,index)=>{
+      const categories=mappingGradeCategories(g);
+      const positions=categories.map(key=>categoryOrder.indexOf(key)+1).sort((a,b)=>a-b);
+      const first=positions[0], last=positions[positions.length-1];
+      const rangeClass=first===1&&last===2?'range-complete-limited':first===2&&last===3?'range-limited-substantial':'range-complete-substantial';
+      const badge=mappingGradeBadge(g,categories[0],m.instrument);
+      const longBadge=badge.replace('class="map-badge ',`class="map-badge map-span-long-badge ${rangeClass} `);
+      const tracks=categoryOrder.map(key=>`<span class="map-span-band ${key}" aria-hidden="true"></span>`).join('');
+      return `<tr class="map-span-row ${index===spanningGrades.length-1?'map-last-span-row':''}"><td colspan="3" class="map-span-lane"><div class="map-span-track">${tracks}<div class="map-span-badge-slot" style="grid-column:${first}/${last+1};grid-row:1;display:flex;align-items:center;min-width:0">${longBadge}</div></div></td></tr>`;
+    }).join('');
+    return baseRow+spans;
   }).join('');
   tbody.querySelectorAll('.map-instrument-link').forEach(a=>a.addEventListener('click',e=>{
     if(e.ctrlKey||e.metaKey||e.shiftKey||e.altKey||e.button!==0)return;
