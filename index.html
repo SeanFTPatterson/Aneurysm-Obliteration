@@ -351,9 +351,9 @@
       <div class="mapping-files"><a href="data/mapping_grades.csv" download>Grade data (.csv)</a></div>
     </div>
     <div class="mapping-categories" aria-label="Proposed common reporting categories">
-      <div class="mapping-category complete"><strong>1. Complete occlusion</strong><span>No meaningful residual aneurysm filling.</span></div>
-      <div class="mapping-category limited"><strong>2. Limited residual filling</strong><span>Small or localized residual filling.</span></div>
-      <div class="mapping-category substantial"><strong>3. Substantial residual filling</strong><span>Persistent filling of a meaningful portion of the sac.</span></div>
+      <div class="mapping-category complete"><strong>1. Complete occlusion</strong></div>
+      <div class="mapping-category limited"><strong>2. Residual neck</strong></div>
+      <div class="mapping-category substantial"><strong>3. Residual aneurysm</strong></div>
     </div>
     <div class="mapping-status-key" aria-label="Guide to mapping badges">
       <span><span class="key-swatch direct" aria-hidden="true"></span><strong>Single-category:</strong> one proposed category</span>
@@ -363,7 +363,7 @@
     </div>
     <div class="table-card"><div class="table-wrap mapping-table-wrap" id="mappingTableWrap" tabindex="0" aria-label="Scrollable scale mapping comparison">
       <table class="mapping-table">
-        <thead><tr><th scope="col">Instrument</th><th scope="col">Modality</th><th scope="col" class="map-complete">Complete occlusion</th><th scope="col" class="map-limited">Limited residual filling</th><th scope="col" class="map-substantial">Substantial residual filling</th><th scope="col">Other information captured</th></tr></thead>
+        <thead><tr><th scope="col">Instrument</th><th scope="col">Modality</th><th scope="col" class="map-complete">Complete occlusion</th><th scope="col" class="map-limited">Residual neck</th><th scope="col" class="map-substantial">Residual aneurysm</th><th scope="col">Other information captured</th></tr></thead>
         <tbody id="mappingBody"></tbody>
       </table>
     </div><div id="mappingEmpty" class="empty" hidden>No mapping records match the current search.</div></div>
@@ -547,8 +547,8 @@ function positionRationalePopover(button){
 
 const gradeCategoryLabels={
   complete:'Complete occlusion',
-  limited:'Limited residual filling',
-  substantial:'Substantial residual filling'
+  limited:'Residual neck',
+  substantial:'Residual aneurysm'
 };
 function gradeDetailNode(tag,css,textValue){
   const node=document.createElement(tag);
