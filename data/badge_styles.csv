@@ -1,7 +1,7 @@
 ﻿field,value,background,text
 *,Good,#e4f4e8,#225b39
-*,Partially good,#fff0c7,#735608
-*,Partially poor,#ffe5cd,#91470b
+*,Somewhat good,#fff0c7,#735608
+*,Somewhat poor,#ffe5cd,#91470b
 *,Poor,#fde4e4,#9f2431
 *,Unable to judge,#f1f3f5,#596475
 *,No evidence,#ffffff,#596475

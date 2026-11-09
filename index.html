@@ -289,13 +289,13 @@
     <div class="brand">
       <div class="eyebrow">Aneurysm Obliteration</div>
       <h1>aSAH Measurement Instrument Database</h1>
-      <div class="subtitle">Browse candidate Aneurysm Obliteration instruments and compare their proposed common reporting categories for the aSAH Core Outcome Set.</div>
+      <div class="subtitle">Browse Aneurysm Obliteration candidate instruments being considered for the aSAH Core Outcome Set.</div>
     </div>
   </div>
 </header>
 <main>
 <div class="wrap">
-  <div class="notice"><strong>About this database.</strong> This database presents candidate measurement instruments for Aneurysm Obliteration, one of the aSAH core outcome domains. Mapping categories are proposed for discussion and are not consensus-endorsed. The instrument descriptions and references are sourced from the supplied Aneurysm Obliteration CSV. Domain Match and Feasibility assessment fields are available for you to populate.</div>
+  <div class="notice"><strong>About this database.</strong> This database presents candidate measurement instruments for Aneurysm Obliteration, one of the aSAH core outcome domains. Aneurysm obliteration is defined as Complete angiographic occlusion (e.g., clipping, coiling, etc.) resulting in elimination of a cerebral aneurysm from cerebral circulation.  </div>
 
   <div class="toolbar" id="toolbar">
     <div><label for="search">Search instruments</label><input id="search" placeholder="Search instruments, grades, or information…" /></div>
@@ -347,7 +347,7 @@
   <section id="mappingView" hidden aria-labelledby="mappingTitle">
     <div class="mapping-heading">
       <div><h2 id="mappingTitle">Common Outcome Mapping</h2>
-        <p>Compare occlusion grading scales and continuous occlusion measures against the proposed three-category standard. Imaging modalities and non-grading approaches remain in the other database views but are excluded here. Grades follow their original scale order, including those that span categories. Modality refers to the treatment technique, not the imaging method; broad scales may be marked Multiple / varies or Not specified. Select any badge for the original definition and proposed mapping details.</p></div>
+        <p>Compare occlusion grading scales and continuous occlusion measures against the proposed three-category standard. Imaging modalities and non-grading approaches remain in the other database views but are excluded here. Grades follow their original scale order, including those that span categories. Modality refers to the treatment technique. Select any badge for the original definition and proposed mapping details.</p></div>
       <div class="mapping-files"><a href="data/mapping_grades.csv" download>Grade data (.csv)</a></div>
     </div>
     <div class="mapping-categories" aria-label="Proposed common reporting categories">
@@ -367,7 +367,7 @@
         <tbody id="mappingBody"></tbody>
       </table>
     </div><div id="mappingEmpty" class="empty" hidden>No mapping records match the current search.</div></div>
-    <p class="mapping-caveat"><strong>Interpretation:</strong> This is a provisional crosswalk, not an endorsed or validated equivalence. A single dashed ↔ badge appears in its original grade order and spans the relevant columns; it represents <em>one original grade</em>, not two separate observations. Grey grades measure another concept or lack sufficient information for any category. Percentage-based conversions are not standardized thresholds. A dash means no grade assigned to that column. Always retain the original grade and relevant additional measurements.</p>
+    <p class="mapping-caveat"><strong>Interpretation:</strong> This is a provisional mapping, not an endorsed or validated equivalence. A single dashed ↔ badge appears in its original grade order and spans the relevant columns; it represents <em>one original grade</em>, not two separate observations. Percentage-based conversions are not standardized thresholds. A dash means no grade assigned to that column.</p>
   </section>
 
   <div class="footerbar">
@@ -1020,7 +1020,7 @@ function setResultsView(view,{persist=true}={}){
   document.getElementById('mappingViewBtn').setAttribute('aria-pressed',String(mapping));
   document.getElementById('viewHelp').textContent=standard
     ? 'Browse the instrument table; select a name to open its full record.'
-    : heatmap ? 'Compare Domain Match ratings across instruments. Select a rating to view its rationale.'
+    : heatmap ? 'Compare Domain Match ratings across instruments. Hover over or select a rating to view its rationale.'
     : feasibility ? 'Compare categorical and open-text feasibility information; scroll horizontally to see all columns.'
     : 'Compare occlusion scales. Long dashed ↔ badges span categories; grey badges cannot be classified.';
   document.getElementById('viewTip').textContent=mapping
