@@ -30,8 +30,7 @@ data/
   instruments.csv               # main instrument records and assessments
   fields.csv                    # configure table/popup/filter/Domain Match/Feasibility fields
   badge_styles.csv              # editable ratings colour palette
-  mapping_grades.csv            # ONE row per original grade and its proposed category
-  mapping_instruments.csv       # ONE row per mapped scale; open-text column and notes
+  mapping_grades.csv            # Grades plus instrument names, inclusion flags and open-text notes
 images/
   team-logo.svg                 # replace with your SAH HOPE logo
 ```
@@ -51,7 +50,7 @@ Then visit `http://localhost:8000` in a browser. This reads the external CSVs ev
 ## Edit instruments and assessments
 
 - `data/instruments.csv` is the main instrument database, with one instrument per row. Keep `id` unique and do **not** include Rebleeding instruments.
-- The new `mapping_id` column links a main instrument to `data/mapping_instruments.csv` (`instrument_id`). The linked `mapping_id` values match 13 supplied records (e.g. AO002 → `boss`, AO011 → `sindou`). MRRC remains a mapping-only row without a source instrument record. If using your original data, add `mapping_id` to corresponding rows (or keep IDs aligned). Otherwise the mapping will still appear but its instrument name may not link to the record.
+- The new `mapping_id` column links a main instrument to `data/mapping_grades.csv` (`instrument_id`). The linked `mapping_id` values match 13 supplied records (e.g. AO002 → `boss`, AO011 → `sindou`). MRRC remains a mapping-only row without a source instrument record. If using your original data, add `mapping_id` to corresponding rows (or keep IDs aligned). Otherwise the mapping will still appear but its instrument name may not link to the record.
 - `data/fields.csv` determines which fields are on the main table and popup. `heatmap=Yes` creates a Domain Match column, `feasibility=Yes` creates a Feasibility column. Set `format=badge` for categorical ratings and `format=text` for longer free text.
 - All Feasibility columns marked `feasibility=Yes` are shown together, and long descriptions expand by clicking `View details`. Use `feasibility_order` for left-to-right order, and optionally `feasibility_group` for a smaller grouping label.
 - For any badge field, add a `<field>_rationale` column to `instruments.csv` to make its rationale available via hover/focus/click; no extra icon.
@@ -62,13 +61,19 @@ Then visit `http://localhost:8000` in a browser. This reads the external CSVs ev
 
 The Mapping view has **14 rows** (occlusion grading scales and a quantitative occlusion measurement comparison) rather than the 21 database/mapping entries. Imaging modalities and unspecified measurement approaches stay in **Overview / Domain Match / Feasibility**, but do not appear in Mapping.
 
-### Grade assignments — `data/mapping_grades.csv`
+### Grade assignments and other information — `data/mapping_grades.csv`
 
-One CSV row per original grade, even when a grade spans two categories. Columns:
+**This is now the only Mapping tab CSV and the only Mapping CSV download.** It contains original grades, proposed categories, instrument labels, the “Other information captured” text and any supplemental notes. It no longer requires `mapping_instruments.csv`.
+
+Each grade still occupies one CSV row, even when it spans categories. For readability, put an instrument's metadata (its name, other information, mapping notes, display order and inclusion flag) in **one row per instrument**, usually its first grade row. Leave those fields blank on the instrument's other grades. The website gathers the non-empty metadata from any grade row sharing the same `instrument_id` and shows the text once in the instrument's table row. Avoid entering conflicting values for the same instrument.
+
+Seven excluded non-grading entries are retained as metadata-only rows with an empty `grade` and `include_in_mapping=No`; they are not displayed as grade badges.
+
+Columns:
 
 | Column | What it controls |
 |---|---|
-| `instrument_id` | Joins to `mapping_instruments.csv` |
+| `instrument_id` | Groups all grade rows belonging to the same scale and links to the main record's `mapping_id` |
 | `grade` | Exact grade name shown in its badge |
 | `category` | `complete`, `limited`, `substantial`, `span`, or `unmapped` |
 | `original_definition` | Original grade description shown in the badge explanation |
@@ -76,6 +81,11 @@ One CSV row per original grade, even when a grade spans two categories. Columns:
 | `sort_order` | Order among grades within one scale |
 | `mapping_status` | `direct`, `provisional`, `spans`, or `unmapped`; a provisional grade has a dotted badge border |
 | `spans_categories` | Only for `category=span`, exactly two or more category IDs separated by `|`, e.g. `limited|substantial` |
+| `instrument` | Instrument name displayed in Mapping (usually populated once per instrument) |
+| `other_information_captured` | Free-text content displayed in the rightmost table column; populated once per instrument |
+| `mapping_notes` | Additional notes shown below the other information; populated once per instrument |
+| `instrument_sort_order` | Instrument's order in the Mapping table (distinct from the grade `sort_order`) |
+| `include_in_mapping` | `Yes` for included grading scales; `No` for excluded techniques and non-grading approaches |
 
 **Display rules:**
 
@@ -95,24 +105,17 @@ One CSV row per original grade, even when a grade spans two categories. Columns:
 
 These decisions are **provisional study-team mappings for Working Group review**. A cross-category badge indicates uncertainty or insufficient detail, not that a patient's aneurysm simultaneously has two independent outcomes.
 
-### Which instruments appear — `data/mapping_instruments.csv`
+### Which instruments appear
 
-| Column | What it controls |
-|---|---|
-| `instrument_id` | Unique mapping ID, shared with grade rows |
-| `instrument` | Instrument name as shown in Mapping |
-| `other_information_captured` | Editable free text in the right-hand column |
-| `mapping_notes` | Supplemental free-text caveats below that description |
-| `sort_order` | Position in the table |
-| `include_in_mapping` | `Yes` = show this grading scale; `No` = exclude this imaging/measurement approach from Mapping only |
+The `include_in_mapping` field now lives in `mapping_grades.csv`. Set it to `Yes` once for an instrument to include its grade rows in the Mapping tab; set it to `No` to exclude an imaging or non-grading approach. This setting **does not** remove the instrument from Overview, Domain Match, Feasibility, or its direct record URL.
 
-The `include_in_mapping` flag **does not affect Overview, Domain Match, Feasibility, the instrument CSV, or record URLs**. It only changes the Mapping tab. To add a new, well-defined obliteration scale, add it to this file, set `include_in_mapping=Yes`, then add its grades to `mapping_grades.csv`. A new mapping row can be linked to a full record by setting that record's `mapping_id` field to the same `instrument_id`.
+To add a new grading scale, add its grade rows with the same unique `instrument_id`. Enter the scale name, `instrument_sort_order`, `include_in_mapping=Yes`, and the free-text fields on one of those rows. If the scale also has a full instrument record, set that record's `mapping_id` to match `instrument_id`.
 
 **Important:** Preserve the original grade and raw continuous measurements alongside any harmonized category. Do not introduce an arbitrary universal percentage cutoff between limited and substantial filling.
 
 ## Using existing data
 
-The original Aneurysm Obliteration `instruments(1).csv` and `fields(1).csv` have already been merged. When adding more fields, update both `data/instruments.csv` and `data/fields.csv` together. The Mapping tab's two CSV files are independent of Domain Match and Feasibility ratings.
+The original Aneurysm Obliteration `instruments(1).csv` and `fields(1).csv` have already been merged. When adding more fields, update both `data/instruments.csv` and `data/fields.csv` together. The single Mapping CSV is independent of Domain Match and Feasibility ratings.
 
 The local `file://` preview is embedded from the **initial** CSVs and does not auto-update after editing those CSVs; use GitHub Pages or `http.server` for editable data. 
 
@@ -124,7 +127,7 @@ Selecting (or hovering/focusing) a grade badge in **Mapping** now opens a struct
 - **Proposed mapping** — coloured common-category badge(s), including a connector for spanning grades or grey “Not directly classifiable” when applicable.
 - **Additional explanation only when needed** — direct one-category mappings do not repeat a rationale; provisional, spanning and unmappable grades show their `mapping_rationale` when informative. For a handful of generic boilerplate rationales, the interface displays a shorter contextual caveat instead.
 
-The **original CSV values are unchanged**, including every rationale. A grade's descriptive text and its mapping rationale remain separate fields, so you can refine either without touching the HTML. The separate **Other information captured** column remains unchanged. Domain Match and Feasibility rationale pop-ups still use their existing compact style.
+The **original CSV values are unchanged**, including every rationale. A grade's descriptive text and its mapping rationale remain separate fields, so you can refine either without touching the HTML. The separate **Other information captured** display column remains unchanged, but its source text now comes from the combined `mapping_grades.csv` file. Domain Match and Feasibility rationale pop-ups still use their existing compact style.
 
 The mapping pop-up is shared with the existing popover system, so click/tap to pin, hover, keyboard focus, close, and Esc handling all continue to work.
 
@@ -144,3 +147,15 @@ The layout uses a second compact table row with a three-column spanning cell, wh
 - To reorder the display, edit `sort_order` for the instrument in `data/mapping_grades.csv`.
 
 - For continuous percentage occlusion entries, display order is **100%, 1–99%, 0%** (descending occlusion) for clarity; no categories or rationales were changed.
+
+## Combined Mapping CSV (November 8, 2026)
+
+The prior **Other information (.csv)** download link and `data/mapping_instruments.csv` have been removed. The **Grade data (.csv)** download now includes `instrument`, `other_information_captured`, `mapping_notes`, `instrument_sort_order` and `include_in_mapping`, in addition to each original grade's fields. The HTML preview's built-in CSV snapshot has been updated as well. Replace the whole site folder when deploying to GitHub Pages, or at minimum update both `index.html` and `data/mapping_grades.csv`. The old `mapping_instruments.csv` can be deleted from your GitHub repository.
+
+## Mapping modality column (November 9, 2026)
+
+The Mapping tab now includes a **Modality** column between Instrument and Complete occlusion. The field is `modality` in `data/mapping_grades.csv` and therefore does not require a new CSV file or additional download. It is an **instrument-level** field: enter it on the first grade row for a scale, as with `other_information_captured`. The database automatically groups it to display once per instrument.
+
+Modality refers to the **aneurysm treatment technique**, not the imaging method used to assess occlusion. The supplied descriptions support Coiling, Clipping, WEB and Flow diversion assignments for named treatment-specific scales. For generic/aggregated measures use `Multiple / varies` or `Not specified` rather than implying a treatment-specific application not supported by the source. All initial entries are editable.
+
+The Mapping search also matches modality. The sticky instrument-name column, white table body, one instrument row, original grade order, clickable Grade Details and continuous multi-column badges are preserved. The grade data download continues to contain all the mapping content (including modality and other information captured).
