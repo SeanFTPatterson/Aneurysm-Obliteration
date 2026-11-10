@@ -305,7 +305,7 @@
 
   <div class="view-bar">
     <div class="view-toggle" role="group" aria-label="Results view">
-      <button type="button" class="view-toggle-btn" id="standardViewBtn" aria-pressed="true">Overview</button>
+      <button type="button" class="view-toggle-btn" id="standardViewBtn" aria-pressed="true">Standard View</button>
       <button type="button" class="view-toggle-btn" id="heatmapViewBtn" aria-pressed="false">Domain Match</button>
       <button type="button" class="view-toggle-btn" id="feasibilityViewBtn" aria-pressed="false">Feasibility</button>
       <button type="button" class="view-toggle-btn" id="mappingViewBtn" aria-pressed="false">Mapping</button>
@@ -320,7 +320,7 @@
 
   <div id="heatmapView" hidden>
     <p id="domainMatchPending" class="assessment-note" hidden>Domain Match assessments have not yet been entered in the starter dataset. Add ratings in <code>data/instruments.csv</code>.</p>
-    <div class="domain-match-overall-note" id="domainMatchOverallNote" hidden><span aria-hidden="true">◈</span><span><strong>Overall Domain Match</strong> is highlighted in the final column. This is a separate overall judgement, not an average of the component ratings. Select a rating to view its rationale when one is provided.</span></div>
+    <div class="domain-match-overall-note" id="domainMatchOverallNote" hidden><span aria-hidden="true"></span><span><strong>Overall Domain Match</strong> is highlighted in the final column. This is a separate overall judgement, not an average of the component ratings. Select a rating to view its rationale when one is provided.</span></div>
     <div id="heatmapLegend" class="heatmap-legend" aria-label="Domain Match rating legend"></div>
     <div class="table-card"><div class="table-wrap"><table class="heatmap-table">
       <thead><tr id="heatmapHead"></tr></thead>
@@ -1064,7 +1064,7 @@ function buildInterface(){
       th.classList.add('heatmap-overall');
       const kicker=document.createElement('span');
       kicker.className='heatmap-overall-kicker';
-      kicker.textContent='Summary judgement';
+      kicker.textContent='Summary';
       const title=document.createElement('span');
       title.className='heatmap-overall-title';
       title.textContent=f.label || 'Overall Domain Match';
