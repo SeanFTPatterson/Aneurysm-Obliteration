@@ -32,6 +32,9 @@
   .meta{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:18px 2px 10px;color:var(--muted);font-size:14px}.meta strong{color:var(--ink)}
   .table-card{background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden}.table-wrap{overflow-x:auto}
   table{width:100%;border-collapse:collapse;min-width:760px} th,td{padding:14px 14px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top} th{font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);background:#fafafa} td{font-size:14px;line-height:1.4}
+  .print-current-view{margin-left:auto;white-space:nowrap;display:inline-flex;gap:7px;align-items:center;justify-content:center;box-shadow:0 1px 2px rgba(17,50,70,.07)}
+  .print-current-view svg{width:17px;height:17px;flex:none}
+  .print-document-heading,.mapping-print-interpretation,.feasibility-print-full{display:none}
   .view-bar{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;margin:0 0 12px}
   .view-toggle{display:inline-flex;padding:4px;background:#eef2f5;border:1px solid #d9e0e5;border-radius:10px;gap:3px}
   .view-toggle-btn{appearance:none;border:0;background:transparent;color:var(--muted);padding:8px 12px;border-radius:7px;font:inherit;font-size:13px;font-weight:800;cursor:pointer}
@@ -281,6 +284,123 @@
   .map-grade-grid .mapping-missing{padding-left:12px}
   .mapping-table tbody tr.mapping-instrument-row > td.map-other-cell{vertical-align:top;padding-top:15px}
   @media(max-width:760px){.map-grade-slot{padding:3px 5px;gap:4px}.map-badge{padding:4px 7px}}
+  /* Print-ready, view-specific output. Hidden tabs remain hidden and active filters are honoured.
+     Print the visible view only; expand scroll containers and repeat table headers. */
+  @page{size:landscape;margin:10mm 9mm 12mm}
+  @media print{
+    html,body{margin:0!important;padding:0!important;height:auto!important;overflow:visible!important;background:#fff!important;color:#152c40!important;
+      -webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
+    header,.notice,.toolbar,.meta,.view-bar,.footerbar,.page-logo-wrap,.mapping-files,
+    .feasibility-controls,.feasibility-scroll-controls,.mapping-coverage,
+    #dialog,#imageLightbox,#rationalePopover,.copy-link,.back-results,.side-nav{display:none!important}
+    main{padding:0!important;margin:0!important}
+    main .wrap{padding:0!important;margin:0!important;width:100%!important;max-width:none!important}
+    .print-document-heading{display:block!important;border-bottom:2px solid #315f78;padding:0 0 9px;margin:0 0 15px;break-after:avoid}
+    .print-document-heading .print-kicker{font-size:9px;letter-spacing:.09em;text-transform:uppercase;color:#41627a;font-weight:800;margin-bottom:3px}
+    .print-document-heading h2{margin:0 0 4px;font-size:18px;line-height:1.25;color:#163850}
+    .print-document-heading .print-meta{display:flex;gap:5px 15px;flex-wrap:wrap;color:#52697b;font-size:10px;line-height:1.35}
+    .print-document-heading .print-filter{font-weight:650}
+    .table-card,.table-wrap,.mapping-table-wrap,.feasibility-table-wrap{max-height:none!important;height:auto!important;max-width:none!important;overflow:visible!important;overscroll-behavior:auto!important;box-shadow:none!important}
+    .table-card{border:0!important;border-radius:0!important}
+    #standardView,#heatmapView,#feasibilityView,#mappingView{width:100%!important;max-width:none!important}
+    table,.heatmap-table,.feasibility-table,.mapping-table{width:100%!important;min-width:0!important;max-width:100%!important;table-layout:fixed!important;border-collapse:collapse!important;border-spacing:0!important}
+    table thead{display:table-header-group!important}
+    table tbody{display:table-row-group!important}
+    table tr{break-inside:avoid-page;page-break-inside:avoid}
+    table th,table td{box-sizing:border-box!important;min-width:0!important;max-width:none!important;white-space:normal!important;overflow-wrap:anywhere!important;word-break:normal!important;padding:5px 5px!important;font-size:9px!important;line-height:1.3!important;border-color:#cbd7e0!important;vertical-align:top!important}
+    table th{font-weight:800!important;letter-spacing:0!important;text-transform:none!important;background:#eaf1f5!important;color:#244257!important;border-bottom:1px solid #97aabb!important}
+    table th:first-child,table td:first-child{position:static!important;left:auto!important;top:auto!important;min-width:0!important;max-width:none!important;box-shadow:none!important}
+    .heatmap-table th,.heatmap-table td,.feasibility-table th,.feasibility-table td,.mapping-table th,.mapping-table td{position:static!important;left:auto!important;top:auto!important}
+    .heatmap-table th:first-child,.heatmap-table td:first-child,.feasibility-table th:first-child,.feasibility-table td:first-child{width:23%!important}
+    .heatmap-table .heatmap-overall{width:18%!important;border-left:3px solid #315f78!important}
+    .heatmap-table th.heatmap-overall{background:#e2eff8!important}
+    .heatmap-table td.heatmap-overall{background:#eff6fa!important}
+    .heatmap-rating,.heatmap-missing,.heatmap-table td.heatmap-overall .heatmap-rating,.heatmap-table td.heatmap-overall .heatmap-missing{min-height:0!important;height:auto!important;padding:5px 3px!important;font-size:8.5px!important;border-radius:4px!important;box-shadow:none!important}
+    .heatmap-overall-kicker{font-size:7px!important;margin-bottom:1px!important}
+    .heatmap-overall-title{font-size:9px!important}
+    .domain-match-overall-note,.assessment-note{padding:7px 9px!important;font-size:10px!important;margin:4px 0 8px!important;break-inside:avoid}
+    .heatmap-legend{font-size:9px!important;gap:4px 9px!important;break-after:avoid!important}
+    .heatmap-legend-swatch{width:11px!important;height:11px!important}
+    .badge,.map-badge,.map-modality-tag{font-size:8.5px!important;padding:3px 5px!important;line-height:1.25!important;box-shadow:none!important}
+    .viewed-marker{display:none!important}
+    .mapping-heading{display:block!important;margin:0 0 7px!important;break-after:avoid}
+    .mapping-heading h2{font-size:14px!important;margin:0 0 3px!important}
+    .mapping-heading p{font-size:9px!important;line-height:1.38!important;margin:0!important;color:#385268!important}
+    .mapping-categories{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:7px!important;margin:6px 0!important;break-inside:avoid}
+    .mapping-category{padding:6px 8px!important;border-radius:5px!important;gap:2px!important}
+    .mapping-category strong{font-size:10px!important}.mapping-category span{font-size:8.5px!important}
+    .mapping-status-key{padding:6px 8px!important;margin:6px 0!important;font-size:8.5px!important;gap:4px 12px!important;break-inside:avoid}
+    .key-swatch{min-width:16px!important;height:13px!important}
+    .mapping-table th:nth-child(1){width:19%!important}.mapping-table th:nth-child(2){width:12%!important}.mapping-table th:nth-child(3){width:13%!important}.mapping-table th:nth-child(4){width:13%!important}.mapping-table th:nth-child(5){width:16%!important}.mapping-table th:nth-child(6){width:27%!important}
+    .mapping-table th.map-complete{background:#daf0df!important}.mapping-table th.map-limited{background:#fff0c8!important}.mapping-table th.map-substantial{background:#fbdcdd!important}
+    .mapping-table tbody tr.mapping-instrument-row>td{border-bottom:2px solid #9eb4c4!important;background:#fff!important}
+    .mapping-table tbody tr.mapping-instrument-row>td:first-child{padding-top:7px!important}
+    .mapping-table tbody tr.mapping-instrument-row>td.map-other-cell{padding-top:7px!important}
+    .mapping-table tbody tr.mapping-instrument-row>td.map-modality-cell{padding-top:7px!important}
+    .mapping-table td.map-grade-cell{padding:4px 0!important}
+    .map-grade-line{min-height:0!important;padding:1px 0!important;break-inside:avoid}
+    .map-grade-slot{padding:2px 4px!important;gap:3px!important}
+    .map-span-long-badge{min-height:19px!important;padding:2px 3px!important;line-height:1.2!important;white-space:normal!important}
+    .map-span-long-badge .span-marker{font-size:11px!important}
+    .map-modality-tag{padding:2px 4px!important}
+    .map-untagged{padding:3px 0!important;margin-top:5px!important}
+    .map-notes{font-size:8px!important;margin-top:3px!important}
+    .mapping-caveat{display:none!important}
+    .mapping-print-interpretation{display:block!important;background:#eef5fd!important;border:1px solid #d5e4f2!important;
+      border-radius:4px!important;color:#30465d!important;padding:5px 8px!important;font-size:9px!important;
+      line-height:1.35!important;margin:5px 0 7px!important;break-inside:avoid;break-after:avoid}
+
+    .feasibility-table .feasibility-text-cell{min-width:0!important;max-width:none!important;width:auto!important}
+    .feasibility-text-inline{font-size:8.5px!important;white-space:normal!important}
+    .feasibility-text-preview{display:none!important}
+    .feasibility-print-full{display:block!important;font-size:8.5px!important;line-height:1.4!important;white-space:pre-wrap!important;overflow-wrap:anywhere!important}
+    .feasibility-group-label{font-size:7px!important}
+    .feasibility-preview-more{display:none!important}
+    .instrument-record-link,.map-instrument-link,.resource-link{color:#1b4967!important;text-decoration:none!important}
+    a[href]:after{content:none!important}
+  }
+  .instrument-print-sheet{display:none}
+  .print-instrument-button{background:#e8f1f6;color:#204f6d;border-color:#bed2df}
+  .print-instrument-button:hover{background:#d8eaf3}
+  .print-instrument-button{display:inline-flex;gap:5px;align-items:center;justify-content:center}
+  .print-instrument-button svg{width:14px;height:14px;flex:none}
+  @media(max-width:700px){.print-instrument-button{padding:7px 8px;font-size:11px}}
+  @media print{
+    body[data-print-target="instrument"] header,
+    body[data-print-target="instrument"] main,
+    body[data-print-target="instrument"] #dialog,
+    body[data-print-target="instrument"] #imageLightbox,
+    body[data-print-target="instrument"] #rationalePopover{display:none!important}
+    body[data-print-target="instrument"] dialog::backdrop{display:none!important}
+    body[data-print-target="instrument"] .instrument-print-sheet{
+      display:block!important;position:static!important;margin:0!important;padding:0!important;
+      width:100%!important;max-width:none!important;overflow:visible!important;
+      font-size:10.5pt!important;line-height:1.43!important;color:#1d3141!important;
+      background:#fff!important;box-shadow:none!important;
+    }
+    .instrument-print-sheet .print-record-header{border-bottom:2px solid #244a63;padding:0 0 10px;margin:0 0 15px;break-after:avoid}
+    .instrument-print-sheet .print-record-kicker{font-size:8.5pt;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:#506a7b}
+    .instrument-print-sheet .print-record-title{font-size:19pt;line-height:1.2;font-weight:800;color:#173b52;margin:6px 0}
+    .instrument-print-sheet .print-record-meta{font-size:8pt;color:#506a7b;overflow-wrap:anywhere}
+    .instrument-print-sheet .modal-body{padding:0!important;margin:0!important}
+    .instrument-print-sheet .instrument-image-wrap{margin:4px 0 14px!important;break-inside:avoid!important}
+    .instrument-print-sheet .instrument-image{max-width:100%!important;max-height:90mm!important;height:auto!important;object-fit:contain!important;cursor:default!important;box-shadow:none!important}
+    .instrument-print-sheet .image-enlarge-hint{display:none!important}
+    .instrument-print-sheet .detail-grid{display:grid!important;grid-template-columns:minmax(105px,27%) minmax(0,1fr)!important;gap:6px 12px!important;font-size:9.5pt!important;line-height:1.4!important}
+    .instrument-print-sheet .detail-grid dt{font-weight:800!important;color:#4e6475!important;break-after:avoid!important}
+    .instrument-print-sheet .detail-grid dd{margin:0!important;overflow-wrap:anywhere!important}
+    .instrument-print-sheet .long-section{margin-top:16px!important;break-inside:auto!important}
+    .instrument-print-sheet .section-title{color:#244a63!important;font-size:9pt!important;margin:0 0 5px!important;break-after:avoid!important}
+    .instrument-print-sheet .long-section div{line-height:1.48!important;white-space:pre-line!important;overflow-wrap:anywhere!important}
+    .instrument-print-sheet .badge{font-size:9pt!important;font-weight:800!important;padding:3px 8px!important;appearance:none!important;border:1px solid #d2dce3!important;border-radius:999px!important}
+    .instrument-print-sheet .instrument-print-rationale{font-size:8.5pt!important;color:#435d72!important;margin:4px 0 0!important;line-height:1.42!important;white-space:pre-line!important;overflow-wrap:anywhere!important}
+    .instrument-print-sheet .instrument-print-url{font-size:8pt;color:#506a7b!important;display:block;white-space:normal!important;overflow-wrap:anywhere!important;margin-top:2px}
+    .instrument-print-sheet .modal-logo-wrap{margin:14px 0 0!important;padding-top:10px!important}
+    .instrument-print-sheet .modal-logo{width:48px!important;height:48px!important}
+    .instrument-print-sheet a,.instrument-print-sheet .resource-link{color:#204f6d!important;text-decoration:underline!important}
+    .instrument-print-sheet .detail-grid dd,.instrument-print-sheet .long-section>div{page-break-inside:auto!important}
+    .instrument-print-sheet .print-record-note{border-top:1px solid #c7d3dd;margin:12px 0 0;padding:7px 0 0;font-size:8pt;color:#536b7c}
+  }
 </style>
 </head>
 <body>
@@ -289,29 +409,39 @@
     <div class="brand">
       <div class="eyebrow">Aneurysm Obliteration</div>
       <h1>aSAH Measurement Instrument Database</h1>
-      <div class="subtitle">Browse Aneurysm Obliteration candidate instruments being considered for the aSAH Core Outcome Set.</div>
+      <div class="subtitle">Browse candidate Aneurysm Obliteration instruments and compare their proposed common reporting categories for the aSAH Core Outcome Set.</div>
     </div>
   </div>
 </header>
 <main>
 <div class="wrap">
-  <div class="notice"><strong>About this database.</strong> This database presents candidate measurement instruments for Aneurysm Obliteration, one of the aSAH core outcome domains. Aneurysm obliteration is defined as Complete angiographic occlusion (e.g., clipping, coiling, etc.) resulting in elimination of a cerebral aneurysm from cerebral circulation.  </div>
+  <div class="notice"><strong>About this database.</strong> This database presents candidate measurement instruments for Aneurysm Obliteration, one of the aSAH core outcome domains. Mapping categories are proposed for discussion and are not consensus-endorsed. The instrument descriptions and references are sourced from the supplied Aneurysm Obliteration CSV. Domain Match and Feasibility assessment fields are available for you to populate.</div>
 
   <div class="toolbar" id="toolbar">
     <div><label for="search">Search instruments</label><input id="search" placeholder="Search instruments, grades, or information…" /></div>
   </div>
 
-  <div class="meta"><div><strong id="count">0</strong> <span id="countLabel">instruments shown</span></div><div>Database version: <strong>Prototype 0.4</strong> · Updated November 8, 2026</div></div>
+  <div class="meta"><div><strong id="count">0</strong> <span id="countLabel">instruments shown</span></div><div>Database version: <strong>Prototype 0.5</strong> · Updated November 11, 2026</div></div>
 
   <div class="view-bar">
     <div class="view-toggle" role="group" aria-label="Results view">
-      <button type="button" class="view-toggle-btn" id="standardViewBtn" aria-pressed="true">Standard View</button>
+      <button type="button" class="view-toggle-btn" id="standardViewBtn" aria-pressed="true">Overview</button>
       <button type="button" class="view-toggle-btn" id="heatmapViewBtn" aria-pressed="false">Domain Match</button>
       <button type="button" class="view-toggle-btn" id="feasibilityViewBtn" aria-pressed="false">Feasibility</button>
       <button type="button" class="view-toggle-btn" id="mappingViewBtn" aria-pressed="false">Mapping</button>
     </div>
     <div class="heatmap-help" id="viewHelp">Browse the summary table, then select an instrument to open its full record.</div>
+    <button type="button" class="btn print-current-view" id="printCurrentView" title="Print or save the selected view as a PDF">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V3h12v6M6 18H4a2 2 0 0 1-2-2v-5a3 3 0 0 1 3-3h14a3 3 0 0 1 3 3v5a2 2 0 0 1-2 2h-2"/><path d="M6 14h12v7H6z"/><path d="M18 11h.01"/></svg>
+      Print current view
+    </button>
   </div>
+
+  <section class="print-document-heading" id="printDocumentHeading" aria-label="Printed view title">
+    <div class="print-kicker">SAH HOPE · aSAH Measurement Instrument Database</div>
+    <h2 id="printViewTitle">Aneurysm Obliteration — Overview</h2>
+    <div class="print-meta"><span id="printViewCount"></span><span id="printFilterSummary" class="print-filter"></span><span id="printGeneratedDate"></span></div>
+  </section>
 
   <div id="standardView" class="table-card"><div class="table-wrap"><table>
     <thead><tr id="tableHead"></tr></thead>
@@ -320,7 +450,7 @@
 
   <div id="heatmapView" hidden>
     <p id="domainMatchPending" class="assessment-note" hidden>Domain Match assessments have not yet been entered in the starter dataset. Add ratings in <code>data/instruments.csv</code>.</p>
-    <div class="domain-match-overall-note" id="domainMatchOverallNote" hidden><span aria-hidden="true"></span><span><strong>Overall Domain Match</strong> is highlighted in the final column. This is a separate overall judgement, not an average of the component ratings. Select a rating to view its rationale when one is provided.</span></div>
+    <div class="domain-match-overall-note" id="domainMatchOverallNote" hidden><span aria-hidden="true">◈</span><span><strong>Overall Domain Match</strong> is highlighted in the final column. This is a separate overall judgement, not an average of the component ratings. Select a rating to view its rationale when one is provided.</span></div>
     <div id="heatmapLegend" class="heatmap-legend" aria-label="Domain Match rating legend"></div>
     <div class="table-card"><div class="table-wrap"><table class="heatmap-table">
       <thead><tr id="heatmapHead"></tr></thead>
@@ -347,13 +477,13 @@
   <section id="mappingView" hidden aria-labelledby="mappingTitle">
     <div class="mapping-heading">
       <div><h2 id="mappingTitle">Common Outcome Mapping</h2>
-        <p>Compare occlusion grading scales and continuous occlusion measures against the proposed three-category standard. Imaging modalities and non-grading approaches remain in the other database views but are excluded here. Grades follow their original scale order, including those that span categories. Modality refers to the treatment technique. Select any badge for the original definition and proposed mapping details.</p></div>
+        <p>Compare occlusion grading scales and continuous occlusion measures against the proposed three-category standard. Imaging modalities and non-grading approaches remain in the other database views but are excluded here. Grades follow their original scale order, including those that span categories. Modality refers to the treatment technique, not the imaging method; broad scales may be marked Multiple / varies or Not specified. Select any badge for the original definition and proposed mapping details.</p></div>
       <div class="mapping-files"><a href="data/mapping_grades.csv" download>Grade data (.csv)</a></div>
     </div>
     <div class="mapping-categories" aria-label="Proposed common reporting categories">
-      <div class="mapping-category complete"><strong>1. Complete occlusion</strong></div>
-      <div class="mapping-category limited"><strong>2. Residual neck</strong></div>
-      <div class="mapping-category substantial"><strong>3. Residual aneurysm</strong></div>
+      <div class="mapping-category complete"><strong>1. Complete occlusion</strong><span>No meaningful residual aneurysm filling.</span></div>
+      <div class="mapping-category limited"><strong>2. Limited residual filling</strong><span>Small or localized residual filling.</span></div>
+      <div class="mapping-category substantial"><strong>3. Substantial residual filling</strong><span>Persistent filling of a meaningful portion of the sac.</span></div>
     </div>
     <div class="mapping-status-key" aria-label="Guide to mapping badges">
       <span><span class="key-swatch direct" aria-hidden="true"></span><strong>Single-category:</strong> one proposed category</span>
@@ -361,13 +491,14 @@
       <span><span class="key-swatch spans" aria-hidden="true">↔</span><strong>Spans categories:</strong> one long dashed badge crossing the relevant columns</span>
       <span><span class="key-swatch unmapped" aria-hidden="true"></span><strong>Not directly classifiable:</strong> grey badge in Other information</span>
     </div>
+    <p class="mapping-print-interpretation"><strong>Interpretation:</strong> Provisional, non-validated crosswalk. Dashed ↔ badges represent one grade spanning categories; grey grades cannot be classified. Percent-based thresholds are not standardized. Retain original grades and additional measurements.</p>
     <div class="table-card"><div class="table-wrap mapping-table-wrap" id="mappingTableWrap" tabindex="0" aria-label="Scrollable scale mapping comparison">
       <table class="mapping-table">
-        <thead><tr><th scope="col">Instrument</th><th scope="col">Modality</th><th scope="col" class="map-complete">Complete occlusion</th><th scope="col" class="map-limited">Residual neck</th><th scope="col" class="map-substantial">Residual aneurysm</th><th scope="col">Other information captured</th></tr></thead>
+        <thead><tr><th scope="col">Instrument</th><th scope="col">Modality</th><th scope="col" class="map-complete">Complete occlusion</th><th scope="col" class="map-limited">Limited residual filling</th><th scope="col" class="map-substantial">Substantial residual filling</th><th scope="col">Other information captured</th></tr></thead>
         <tbody id="mappingBody"></tbody>
       </table>
     </div><div id="mappingEmpty" class="empty" hidden>No mapping records match the current search.</div></div>
-    <p class="mapping-caveat"><strong>Interpretation:</strong> This is a provisional mapping, not an endorsed or validated equivalence. A single dashed ↔ badge appears in its original grade order and spans the relevant columns; it represents <em>one original grade</em>, not two separate observations. Percentage-based conversions are not standardized thresholds. A dash means no grade assigned to that column.</p>
+    <p class="mapping-caveat"><strong>Interpretation:</strong> This is a provisional crosswalk, not an endorsed or validated equivalence. A single dashed ↔ badge appears in its original grade order and spans the relevant columns; it represents <em>one original grade</em>, not two separate observations. Grey grades measure another concept or lack sufficient information for any category. Percentage-based conversions are not standardized thresholds. A dash means no grade assigned to that column. Always retain the original grade and relevant additional measurements.</p>
   </section>
 
   <div class="footerbar">
@@ -394,6 +525,7 @@
       <h2 id="mName" style="margin:0;font-size:25px"></h2>
     </div>
     <div class="modal-head-actions">
+      <button class="copy-link print-instrument-button" id="printInstrument" type="button" title="Print this instrument or save it as a PDF" aria-label="Print this instrument"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V3h12v6M6 18H4a2 2 0 0 1-2-2v-5a3 3 0 0 1 3-3h14a3 3 0 0 1 3 3v5a2 2 0 0 1-2 2h-2"/><path d="M6 14h12v7H6z"/><path d="M18 11h.01"/></svg>Print</button>
       <button class="copy-link" id="copyRecordLink" type="button">Copy link</button>
       <button class="close" id="close" aria-label="Close" title="Close">×</button>
     </div>
@@ -412,6 +544,9 @@
     <button class="btn" id="nextInstrument">Next →</button>
   </div>
 </dialog>
+
+<!-- Dedicated record print sheet: outside the modal/top layer, so long content is never clipped. -->
+<article id="instrumentPrintSheet" class="instrument-print-sheet" aria-label="Printable instrument record"></article>
 
 <dialog id="imageLightbox" class="image-lightbox" aria-label="Full-screen instrument image">
   <div class="image-lightbox-inner">
@@ -547,8 +682,8 @@ function positionRationalePopover(button){
 
 const gradeCategoryLabels={
   complete:'Complete occlusion',
-  limited:'Residual neck',
-  substantial:'Residual aneurysm'
+  limited:'Limited residual filling',
+  substantial:'Substantial residual filling'
 };
 function gradeDetailNode(tag,css,textValue){
   const node=document.createElement(tag);
@@ -951,7 +1086,7 @@ function feasibilityValue(field,record){
       data-rationale-title="${escapeHTML(label)}"
       aria-haspopup="dialog"
       aria-expanded="false"
-      title="View full text"><span>${escapeHTML(preview)}</span><span class="feasibility-preview-more">View details</span></button>`;
+      title="View full text"><span>${escapeHTML(preview)}</span><span class="feasibility-preview-more">View details</span></button><span class="feasibility-print-full">${escapeHTML(value)}</span>`;
 }
 
 function buildFeasibilityHead(){
@@ -1020,7 +1155,7 @@ function setResultsView(view,{persist=true}={}){
   document.getElementById('mappingViewBtn').setAttribute('aria-pressed',String(mapping));
   document.getElementById('viewHelp').textContent=standard
     ? 'Browse the instrument table; select a name to open its full record.'
-    : heatmap ? 'Compare Domain Match ratings across instruments. Hover over or select a rating to view its rationale.'
+    : heatmap ? 'Compare Domain Match ratings across instruments. Select a rating to view its rationale.'
     : feasibility ? 'Compare categorical and open-text feasibility information; scroll horizontally to see all columns.'
     : 'Compare occlusion scales. Long dashed ↔ badges span categories; grey badges cannot be classified.';
   document.getElementById('viewTip').textContent=mapping
@@ -1064,7 +1199,7 @@ function buildInterface(){
       th.classList.add('heatmap-overall');
       const kicker=document.createElement('span');
       kicker.className='heatmap-overall-kicker';
-      kicker.textContent='Summary';
+      kicker.textContent='Summary judgement';
       const title=document.createElement('span');
       title.className='heatmap-overall-title';
       title.textContent=f.label || 'Overall Domain Match';
@@ -1584,6 +1719,116 @@ async function getCSV(path,key){
   if(!['http:','https:'].includes(location.protocol) && window.__EMBEDDED_CSV) return {ok:true,text:async()=>window.__EMBEDDED_CSV[key]};
   return fetch(path,{cache:'no-store'});
 }
+
+// Build a dedicated print-only copy of the open instrument (not the scrollable
+// dialog). This preserves the complete description and citations across pages.
+const instrumentPrintSheet=document.getElementById('instrumentPrintSheet');
+const instrumentPrintPageStyle=document.createElement('style');
+instrumentPrintPageStyle.media='print';
+document.head.appendChild(instrumentPrintPageStyle);
+let printInstrumentRequested=false;
+
+function prepareInstrumentPrint(){
+  const record=instruments.find(i=>i.id===currentRecordId);
+  if(!record || !dialog.open) return false;
+  hideRationale();
+  instrumentPrintSheet.replaceChildren();
+  const heading=document.createElement('div');
+  heading.className='print-record-header';
+  const kicker=document.createElement('div'); kicker.className='print-record-kicker';
+  kicker.textContent='SAH HOPE · Aneurysm Obliteration · Instrument record';
+  const title=document.createElement('h1'); title.className='print-record-title';
+  title.textContent=instrumentDisplayName(record);
+  const meta=document.createElement('div'); meta.className='print-record-meta';
+  meta.textContent=`${record.id || 'Instrument'} · Printed ${new Date().toLocaleString(undefined,{dateStyle:'medium',timeStyle:'short'})}`;
+  heading.append(kicker,title,meta);
+  instrumentPrintSheet.appendChild(heading);
+
+  // Clone the currently displayed details, not the surrounding dialog controls.
+  const content=document.getElementById('modalBody').cloneNode(true);
+  content.removeAttribute('id');
+  content.querySelectorAll('.image-enlarge-hint').forEach(el=>el.remove());
+  content.querySelectorAll('.instrument-image').forEach(img=>{
+    img.removeAttribute('role'); img.removeAttribute('tabindex');
+    img.removeAttribute('title'); img.removeAttribute('aria-label');
+    img.style.cursor='default';
+  });
+  // Avoid printing a broken image icon when a local image asset is missing.
+  content.querySelectorAll('img').forEach(img=>{
+    if(img.complete && img.naturalWidth===0){ img.closest('.instrument-image-wrap,.modal-logo-wrap')?.remove(); }
+    else img.addEventListener('error',()=>img.closest('.instrument-image-wrap,.modal-logo-wrap')?.remove(),{once:true});
+  });
+  content.querySelectorAll('.badge-rationale').forEach(badge=>{
+    const rationale=String(badge.dataset.rationale||'').trim();
+    const tag=document.createElement('span'); tag.className=badge.className.replace('badge-rationale','').trim();
+    tag.setAttribute('style',badge.getAttribute('style')||''); tag.textContent=badge.textContent.trim();
+    badge.replaceWith(tag);
+    if(rationale){
+      const explanation=document.createElement('div');
+      explanation.className='instrument-print-rationale';
+      explanation.textContent=`Rationale: ${rationale}`;
+      tag.insertAdjacentElement('afterend',explanation);
+    }
+  });
+  content.querySelectorAll('a.resource-link').forEach(anchor=>{
+    const address=document.createElement('span'); address.className='instrument-print-url';
+    address.textContent=anchor.href;
+    anchor.insertAdjacentElement('afterend',address);
+  });
+  instrumentPrintSheet.appendChild(content);
+  const footer=document.createElement('p'); footer.className='print-record-note';
+  footer.textContent='Candidate measurement instrument information; inclusion does not indicate Core Outcome Set endorsement.';
+  instrumentPrintSheet.appendChild(footer);
+  document.body.dataset.printTarget='instrument';
+  // The default multi-column view uses landscape. A single record reads better in portrait.
+  instrumentPrintPageStyle.textContent='@page { size: portrait; margin: 12mm 14mm; }';
+  return true;
+}
+
+function cleanUpPrint(){
+  printInstrumentRequested=false;
+  delete document.body.dataset.printTarget;
+  instrumentPrintPageStyle.textContent='';
+  instrumentPrintSheet.replaceChildren();
+}
+
+// Print the selected, currently filtered comparison view without its on-screen controls.
+// Also prepares the heading when someone uses Ctrl/Cmd+P rather than the button.
+function preparePrintView(){
+  const titles={standard:'Overview',heatmap:'Domain Match',feasibility:'Feasibility',mapping:'Common Outcome Mapping'};
+  const viewName=titles[currentView] || titles.standard;
+  document.getElementById('printViewTitle').textContent=`Aneurysm Obliteration — ${viewName}`;
+  const n=currentView==='mapping' ? getFilteredMappingInstruments().length : filteredRows().length;
+  document.getElementById('printViewCount').textContent=`${n} ${currentView==='mapping' ? 'scales / quantitative measures' : 'instruments'} shown`;
+  const activeFilters=[];
+  const term=document.getElementById('search').value.trim();
+  if(term) activeFilters.push(`Search: ${term}`);
+  for(const [field,control] of Object.entries(filterControls)){
+    if(!control.value) continue;
+    const corresponding=fields.find(f=>f.field===field);
+    activeFilters.push(`${corresponding?.label || field}: ${control.value}`);
+  }
+  document.getElementById('printFilterSummary').textContent=activeFilters.length
+    ? `Filters — ${activeFilters.join(' · ')}` : 'All results (no filters)';
+  document.getElementById('printGeneratedDate').textContent=`Printed ${new Date().toLocaleString(undefined,{dateStyle:'medium',timeStyle:'short'})}`;
+}
+window.addEventListener('beforeprint',()=>{
+  // Ctrl/Cmd+P while an instrument is open should print that instrument, too.
+  if((printInstrumentRequested || dialog.open) && prepareInstrumentPrint()) return;
+  cleanUpPrint();
+  preparePrintView();
+});
+window.addEventListener('afterprint',cleanUpPrint);
+document.getElementById('printCurrentView').addEventListener('click',()=>{
+  printInstrumentRequested=false;
+  preparePrintView();
+  window.print();
+});
+document.getElementById('printInstrument').addEventListener('click',()=>{
+  if(!dialog.open) return;
+  printInstrumentRequested=true;
+  if(prepareInstrumentPrint()) window.print();
+});
 
 async function init(){
   try{
